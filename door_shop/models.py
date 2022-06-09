@@ -8,6 +8,9 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to='articles/', null=True, blank=True)
 
+    def display_categories_name(self):
+        return ', '.join([category.name for category in self.categories.all()[:3]])
+
     def __str__(self):
         return self.name
 
@@ -39,6 +42,7 @@ class ProductOrder(models.Model):
         on_delete=models.CASCADE,
         related_name='order'
     )
+    quantity = models.IntegerField()
 
 
 class Categories(models.Model):
@@ -49,6 +53,10 @@ class Categories(models.Model):
         through='CategoriesProduct',
         related_name='categories'
     )
+
+    def display_products_name(self):
+        return ', '.join([products.name for products in self.product.all()[:3]])
+
     def __str__(self):
         return self.name
 
@@ -57,7 +65,7 @@ class CategoriesProduct(models.Model):
     categories = models.ForeignKey(
         Categories,
         on_delete=models.CASCADE,
-        related_name='categories'
+        related_name='categories1'
 
     )
     product = models.ForeignKey(
