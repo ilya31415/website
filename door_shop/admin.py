@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from door_shop.models import Product, Order, ProductOrder, Categories, CategoriesProduct, Client
+from door_shop.models import Product, Order, ProductOrder, Categories, CategoriesProduct, Client, TrendingProduct
 
 
 class ProductOrderInline(admin.TabularInline):
@@ -10,6 +10,11 @@ class ProductOrderInline(admin.TabularInline):
 
 class CategorisProductInline(admin.TabularInline):
     model = CategoriesProduct
+    extra = 1
+
+
+class ProductInline(admin.TabularInline):
+    model = Product
     extra = 1
 
 
@@ -34,3 +39,10 @@ class CategoriesAdmin(admin.ModelAdmin):
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ["name", "phoneNumber"]
+
+
+@admin.register(TrendingProduct)
+class TrendingProductAdmin(admin.ModelAdmin):
+    list_display = ['product']
+
+

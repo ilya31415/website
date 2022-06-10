@@ -1,7 +1,20 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView
 # Create your views here.
+from door_shop.models import Product
 
-def home(request):
-    return render(request, 'index.html')
+
+
+
+class ProductList(ListView):
+    model = Product
+    template_name = "index.html"
+
+
+
+
+
+
+
+
 
